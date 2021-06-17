@@ -5,8 +5,8 @@ import { Task } from './interfaces/Task';
 import { TasksService } from './tasks.service';
 
 describe('TasksService', () => {
-  let service: TasksService;
-  let tasks: Task[] | object;
+  let service: TasksService = new TasksService();
+  let tasks: Task[];
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -18,7 +18,7 @@ describe('TasksService', () => {
 
   describe('getTasks', () => {
     it('should return an array of tasks', async () => {
-      service.getTasks().then(gottenTasks => (tasks = gottenTasks));
+      tasks = service.getTasks();
     });
 
     it('should be defined', () => {

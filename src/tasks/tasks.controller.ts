@@ -22,9 +22,13 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Delete(':id')
-  deleteTask(
+  /*deleteTask(
     @Param('id') id: string
   ): Promise<string | Record<string, unknown>> {
+    return this.tasksService.deleteTask(id);
+  }*/
+  deleteTask(@Param('id') id: number): string {
+    if (!id) return 'Missing ID!';
     return this.tasksService.deleteTask(id);
   }
 
@@ -32,22 +36,32 @@ export class TasksController {
   /*getTask(@Req() req, @Res() res) {
     return res.send('Hello, world!');
   }*/
-  getTasks(): Promise<Task[] | { message: string }> {
+  /*getTasks(): Promise<Task[] | { message: string }> {
+    return this.tasksService.getTasks();
+  }*/
+  getTasks(): Task[] {
     return this.tasksService.getTasks();
   }
 
   @Get(':id')
-  getTask(@Param('id') id: string): Promise<Task | { message: string }> {
+  /*getTask(@Param('id') id: string): Promise<Task | { message: string }> {
+    return this.tasksService.getTask(id);
+  }*/
+  getTask(@Param('id') id: number): Task | string {
+    if (!id) return 'Missing ID!';
     return this.tasksService.getTask(id);
   }
 
   @Post()
-  createTask(@Body() task: CreateTaskDto): Promise<Task> {
+  /*createTask(@Body() task: CreateTaskDto): Promise<Task> {
     return this.tasksService.createTask(task);
+  }*/
+  createTask(@Body() task: CreateTaskDto): string {
+    return 'Task created successfully!';
   }
 
   @Put(':id')
-  updateTask(@Body() task: CreateTaskDto, @Param('id') id): string {
+  updateTask(@Body() task: CreateTaskDto, @Param('id') id: number): string {
     console.log(task);
     return `Updating task ${id}...`;
   }
